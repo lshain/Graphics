@@ -144,10 +144,21 @@ float3 SampleBakedGI(PositionInputs posInputs, float3 normalWS, uint renderingLa
         // For Probe Volumes specifically, this is not necessary - it would be better to return the coefficients, and just evaluate those coefficients twice (once for for each normal).
         // We already do this in LightLoop evaluation mode.
         // This would require the caller to track whether or not it needs to be called a second time.
-        ProbeVolumeCoefficients coefficients;
-        AccumulateProbeVolumes(posInputs, normalWS, renderingLayers, coefficients, probeVolumeHierarchyWeight);
-        combinedGI += EvaluateProbeVolumeCoefficients(normalWS, coefficients);
+#if SHADEROPTIONS_PROBE_VOLUMES_ENCODING_MODE == PROBEVOLUMESENCODINGMODES_SPHERICAL_HARMONICS_L0
+        ProbeVolumeSphericalHarmonicsL0 coefficients;
+        ProbeVolumeAccumulateSphericalHarmonicsL0(posInputs, normalWS, renderingLayers, coefficients, probeVolumeHierarchyWeight);
+        combinedGI += EvaluateProbeVolumeSphericalHarmonicsL0(normalWS, coefficients);
+#elif SHADEROPTIONS_PROBE_VOLUMES_ENCODING_MODE == PROBEVOLUMESENCODINGMODES_SPHERICAL_HARMONICS_L1
+        ProbeVolumeSphericalHarmonicsL1 coefficients;
+        ProbeVolumeAccumulateSphericalHarmonicsL1(posInputs, normalWS, renderingLayers, coefficients, probeVolumeHierarchyWeight);
+        combinedGI += EvaluateProbeVolumeSphericalHarmonicsL1(normalWS, coefficients);
+#elif SHADEROPTIONS_PROBE_VOLUMES_ENCODING_MODE == PROBEVOLUMESENCODINGMODES_SPHERICAL_HARMONICS_L2
+        ProbeVolumeSphericalHarmonicsL2 coefficients;
+        ProbeVolumeAccumulateSphericalHarmonicsL2(posInputs, normalWS, renderingLayers, coefficients, probeVolumeHierarchyWeight);
+        combinedGI += EvaluateProbeVolumeSphericalHarmonicsL2(normalWS, coefficients);
+#endif
         combinedGI += EvaluateProbeVolumeAmbientProbeFallback(normalWS, probeVolumeHierarchyWeight);
+
 #endif
 
 #endif
