@@ -67,9 +67,6 @@ PackedVaryingsToPS VertTesselation(VaryingsToDS input)
 #define EXTRA_BUFFER_TARGET SV_Target1
 #endif
 
-#if defined(DEBUG_DISPLAY) && !defined(_DEPTHOFFSET_ON)
-[earlydepthstencil] // quad overshading debug mode writes to UAV
-#endif
 void Frag(PackedVaryingsToPS packedInput,
         #ifdef OUTPUT_SPLIT_LIGHTING
             out float4 outColor : SV_Target0,  // outSpecularLighting
