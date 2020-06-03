@@ -204,6 +204,7 @@ void Frag(PackedVaryingsToPS packedInput,
             bool processed  = false;
             int  lockCount  = 0;
 
+            /*
             for (int i = 0; i < 16; i++)
             {
                 if (!processed)
@@ -224,6 +225,7 @@ void Frag(PackedVaryingsToPS packedInput,
 
             if (lockCount)
                 InterlockedAdd(_DebugDisplayUAV[COORD_TEXTURE2D_X(quad)], 1);
+             */
         }
         else
 #endif

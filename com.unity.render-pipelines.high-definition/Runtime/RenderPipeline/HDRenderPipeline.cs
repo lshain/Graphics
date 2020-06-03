@@ -3753,7 +3753,7 @@ namespace UnityEngine.Rendering.HighDefinition
             {
                 CoreUtils.SetRenderTarget(cmd, m_CameraColorBuffer, m_SharedRTManager.GetDepthStencilBuffer());
 
-                cmd.SetRandomWriteTarget(2, m_SharedRTManager.GetDebugDisplayUAV());
+                //cmd.SetRandomWriteTarget(2, m_SharedRTManager.GetDebugDisplayUAV());
 
                 // Depth test less equal + no color write
                 var stateBlock = new RenderStateBlock
@@ -3773,7 +3773,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 var rendererListTransparent = RendererList.Create(CreateTransparentRendererListDesc(cull, hdCamera.camera, m_AllTransparentPassNames, m_CurrentRendererConfigurationBakedLighting, stateBlock: stateBlock));
                 DrawTransparentRendererList(renderContext, cmd, hdCamera.frameSettings, rendererListTransparent);
 
-                cmd.ClearRandomWriteTargets();
+                //cmd.ClearRandomWriteTargets();
                 m_FullScreenDebugPushed = true;
             }
         }
@@ -3784,7 +3784,7 @@ namespace UnityEngine.Rendering.HighDefinition
             {
                 CoreUtils.SetRenderTarget(cmd, m_CameraColorBuffer, m_SharedRTManager.GetDepthStencilBuffer());
 
-                cmd.SetRandomWriteTarget(2, m_SharedRTManager.GetDebugDisplayUAV());
+                //cmd.SetRandomWriteTarget(2, m_SharedRTManager.GetDebugDisplayUAV());
 
                 // Depth test less equal + no color write
                 var stateBlock = new RenderStateBlock
@@ -3804,7 +3804,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 var rendererListTransparent = RendererList.Create(CreateTransparentRendererListDesc(cull, hdCamera.camera, m_AllTransparentPassNames, m_CurrentRendererConfigurationBakedLighting, stateBlock: stateBlock));
                 DrawTransparentRendererList(renderContext, cmd, hdCamera.frameSettings, rendererListTransparent);
 
-                cmd.ClearRandomWriteTargets();
+                //cmd.ClearRandomWriteTargets();
                 m_FullScreenDebugPushed = true;
             }
         }
@@ -4756,11 +4756,11 @@ namespace UnityEngine.Rendering.HighDefinition
             mpb.SetBuffer(HDShaderIDs._DebugDepthPyramidOffsets, parameters.depthPyramidOffsets);
             mpb.SetInt(HDShaderIDs._DebugContactShadowLightIndex, parameters.debugDisplaySettings.data.fullScreenContactShadowLightIndex);
 
-            cmd.SetRandomWriteTarget(2, parameters.debugDisplayUAV);
+            //cmd.SetRandomWriteTarget(2, parameters.debugDisplayUAV);
 
             HDUtils.DrawFullScreen(cmd, parameters.debugFullScreenMaterial, output, mpb, 0);
 
-            cmd.ClearRandomWriteTargets();
+            //cmd.ClearRandomWriteTargets();
         }
 
         static void ResolveColorPickerDebug(in DebugParameters  parameters,
